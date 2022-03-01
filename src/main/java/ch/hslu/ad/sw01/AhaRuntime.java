@@ -68,13 +68,28 @@ public class AhaRuntime {
 
   private static void task1() {
     increaseTaskCallCounter(TASK_1);
+    try {
+      Thread.sleep(5);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   private static void task2() {
     increaseTaskCallCounter(TASK_2);
+    try {
+      Thread.sleep(10);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   private static void task3() {
     increaseTaskCallCounter(TASK_3);
+    try {
+      Thread.sleep(15);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }
