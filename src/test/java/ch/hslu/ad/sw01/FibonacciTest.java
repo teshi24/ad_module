@@ -80,10 +80,17 @@ class FibonacciTest {
     // Time in nano seconds: 11000
   }
 
+  // --> Runtimemessungen sollten immer mehrfach ausgeführt werden
   private void measureRuntime(final Function<Integer, Integer> function) {
     long start = System.nanoTime();
-    function.apply(10);
+    //final long iterations = 1_000_000L;
+    final long iterations = 100L;
+    for (long i = 0; i < iterations; i++) {
+      Fibonacci.resetFibonacciNumberCache();
+      function.apply(10);
+    }
     long end = System.nanoTime();
-    System.out.println("Time in nano seconds: " + (end - start));
+    final long averageRuntime = (end - start) / iterations;
+    System.out.println("Time in nano seconds: " + averageRuntime);
   }
 }

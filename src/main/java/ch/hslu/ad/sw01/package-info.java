@@ -69,12 +69,12 @@
  * | 2       | 6.64386 | 100 | 200       | 10 000 | 1 000 000 | 1.26 * 10^30 | 5.15 *  e^47 | 9.33 *  e^157 |
  *
  * b) Bestimmen Sie von folgenden Funktionen deren Ordnung:
- * (1) f(n) = n^3 + 0.1·2^n           -> O(2^n)
- * (2) f(n) = 5326 + ln(n)            -> O(ln(n))
- * (3) f(n) = 2 + 37 n^3 + 0.01 n^4   -> O(n^4)
- * (4) f(n) = 1000 n + n^3            -> O(n^3)
- * (5) f(n) = n^7 + n!                -> O(n!)
- * (6) f(n) = ln(n) + 1000·n          -> O(n)
+ * (1) f(n) = n^3 + 0.1·2^n           -> O(2^n) - exponential
+ * (2) f(n) = 5326 + ln(n)            -> O(ln(n)) - logarithmisch
+ * (3) f(n) = 2 + 37 n^3 + 0.01 n^4   -> O(n^4) - potenz
+ * (4) f(n) = 1000 n + n^3            -> O(n^3) - potenz
+ * (5) f(n) = n^7 + n!                -> O(n!) - fakultät
+ * (6) f(n) = ln(n) + 1000·n          -> O(n) - nominal
  *
  * c) Ordnen Sie die resultierenden Ordnungen von b) gemäss ihrer Wachstumsrate, d.h. zuerst die
  *    kleinste, dann aufsteigend die grösseren.
@@ -89,7 +89,8 @@
  *                                        x = 0.1s / 10'000^2
  *                                        y = x * 100'000^2 = 0.1s / 10'000^2 * 100'000^2 = 0.1s * 100 = 10s
  *                                        --> (100'000/10'000)^2 --> 10^2 = 100 --> 100 * 0.1s = 10
- *    (3) O(n log n)  ->  1  s   weil: 10 log 10 = 10 --> 10 * 0.1s = 1s
+ *    (3) O(n log n)  ->  Achtung, logikfehler: faktor vom resultat nehmen, nicht von rg 1  s   weil: 10 log 10 = 10 --> 10 * 0.1s = 1s
+ *                    -->   100/m * log(100/m) geteilt durch 10/m * log (10/m) => faktor von 12.5 --> 1.25s
  *
  * e) Zeigen Sie auf, weshalb bei O(logB n) der Wert der Basis keine Rolle spielt. Tipp: Wie lässt sich
  *    schon wieder der Logarithmuswert für eine beliebige Basis B ausrechnen?
@@ -110,5 +111,6 @@
  *    2 -> doA*n + doC(5)*2n = n O(1) + 2n * O(1) = O(n) + 2 * O(n) = O(n)
  *    3 -> doA*n + doC(n)*n*n = n O(1) + O(n) * n^2 = O(n) + O(n^3) = O(n^3)
  *    4 -> doD(n)*n + doA*n*(n+5) = O(n^2) * n + O(1) * (n^2 + 5n) = O(n^3) + O(n^2) + 5 O(n) = O(n^3)
+ *
  */
 package ch.hslu.ad.sw01;
