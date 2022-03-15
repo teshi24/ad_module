@@ -13,7 +13,6 @@ public final class BinaryTree implements Tree<Integer> {
 
   BinaryTree() {
     root = null;
-    height = 0;
     size = 0;
   }
 
@@ -104,6 +103,7 @@ public final class BinaryTree implements Tree<Integer> {
     }
     LOG.trace("Added as root, since root was null: {}", this);
     root = newKnot;
+    ++size;
   }
 
   private boolean dataShouldBeLeftChildOf(final BinaryTreeKnot data, final BinaryTreeKnot knot) {
@@ -114,6 +114,7 @@ public final class BinaryTree implements Tree<Integer> {
     LOG.trace("Going to the left from knot: {}", knot);
     if (!knot.hasLeftChild()) {
       knot.setLeftChild(newKnot);
+      ++size;
       LOG.trace("Added as leftChild: {}", this);
       return true;
     }
@@ -124,6 +125,7 @@ public final class BinaryTree implements Tree<Integer> {
     LOG.trace("Going to the right from knot: {}", knot);
     if (!knot.hasRightChild()) {
       knot.setRightChild(newKnot);
+      ++size;
       LOG.trace("Added as rightChild: {}", this);
       return true;
     }
@@ -138,5 +140,9 @@ public final class BinaryTree implements Tree<Integer> {
   @Override
   public String toString() {
     return "BinaryTree{" + "height=" + height + ", size=" + size + ", root=" + root + '}';
+  }
+
+  public int size() {
+    return size;
   }
 }

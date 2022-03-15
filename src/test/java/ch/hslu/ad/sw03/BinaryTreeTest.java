@@ -51,6 +51,32 @@ class BinaryTreeTest {
   }
 
   @Test
+  void size_emptyTree_treeSizeIsZero() {
+    assertThat(tree.size()).isZero();
+  }
+
+  @Test
+  void size_addValidDataToEmptyTree_treeSizeIsOne() {
+    final Integer data = 1;
+    tree.add(data);
+    assertThat(tree.size()).isOne();
+  }
+
+  @Test
+  void size_treeWithMultipleDataPoints_treeSizeIsEqualsToAddedData() {
+    tree = getInitializedTree();
+    assertThat(tree.size()).isEqualTo(dataOfInitializedTree().size());
+  }
+
+  @Test
+  void add_validDataToEmptyTree_treeSizeIsOne() {
+    final Integer data = 1;
+    assertThat(tree.size()).isZero();
+    tree.add(data);
+    assertThat(tree.size()).isOne();
+  }
+
+  @Test
   void add_validDataToEmptyTree_treeContainsProvidedData() {
     final Integer data = 1;
     tree.add(data);

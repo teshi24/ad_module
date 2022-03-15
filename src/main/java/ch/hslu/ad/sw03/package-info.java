@@ -2,7 +2,7 @@
  * D2, A1:
  * a) Wurzel:                       a
  * b) Blätter:                      e, e, g, k, i
- * c) innere Knoten (Grad):         b (3), c (0), d (2), h (1), j (1)
+ * c) innere Knoten (Grad):         a (3) --> Wurzel ist auch ein innerer Knoten! b (3), c (0), d (2), h (1), j (1)
  * d) Niveau Knoten d:              Niveau 1
  * e) Anzahl Knoten auf Niveau 2:   5
  * f) Tiefe Knoten j:               3
@@ -13,6 +13,10 @@
  * unterscheiden.
  * z.B: Der linke Teilbaum vom Knoten d hat die Höhe 4, während der rechte Teilbaum nur die Höhe 2 hat, die Differenz
  * beträgt somit mindestens an einer Stelle 2 (> 1).
+ *
+ *
+ *
+ *
  *
  * D2, A2:
  * Binäre Bäume:
@@ -26,7 +30,7 @@
  * a) Anzahl Wurzeln:                         1
  * b) Ordnung binäre Bäume:                   2
  * c) Minimale Anzahl Niveaus für 31 Knoten:  5
- *    Minimale Anzahl Niveaus = log2 (Anzahl Knoten + 1) = log2(32) = 5
+ *    Minimale Anzahl Niveaus = ld (Anzahl Knoten + 1) = ld(32) = 5
  * d) Maximale Anzahl Niveaus für 31 Knoten: 31
  *    Maximale Anzahl Niveaus = Anzahl Knoten = 31
  * e) Maximale Anzahl Knoten pro Niveau: (2^Niveau)
@@ -40,7 +44,8 @@
  *            4
  *        2       5
  *      1   3
- * g) Suchaufwand im besten Fall (Baum ausgeglichen / balanciert): logn(n) -> O(log n)
+ * g) (Allerbester Fall: Wurzel --> O(1))
+ *    Suchaufwand im besten Fall (Baum ausgeglichen / balanciert): ld(n) -> O(ld n)
  *    Suchaufwand im schlechtesten Fall (Baum unausgeglichen => zur Liste degeneriert): n -> O(n)
  *
  *
@@ -54,6 +59,8 @@
  *                 D               L
  *             B       F       J       N
  *           A   C   E   G   I   K   M   O
+ *
+ *
  * c) H != N --> H < N --> rechts
  *    L != N --> L < N --> rechts
  *    N == N

@@ -31,4 +31,10 @@ public interface Tree<E> {
    * Balances the {@link Tree} to optimize the performance for search queries.
    */
   void balance();
+
+  /**
+   * Determines size of the {@link Tree}
+   * @return size of {@link Tree}/amount of elements in {@link Tree}
+   */
+  int size();
 }
