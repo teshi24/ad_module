@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ch.hslu.ad.exceptionHandling.ExceptionTestHelpers.assertThrowsExactly;
 
 class StringStackTest {
   private static final int DEFAULT_MAX_SIZE = 10;
