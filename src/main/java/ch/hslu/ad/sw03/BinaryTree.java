@@ -8,7 +8,7 @@ public final class BinaryTree implements Tree<Integer> {
   private static final Logger LOG = LogManager.getLogger(BinaryTree.class);
 
   private BinaryTreeKnot root;
-  private int height;
+
   private int size;
 
   BinaryTree() {
@@ -26,8 +26,35 @@ public final class BinaryTree implements Tree<Integer> {
   }
 
   @Override
-  public void remove(final Integer data) {
-    throw new UnsupportedOperationException("functionality not yet implemented");
+  public boolean remove(final Integer data) {
+    if (data == null) {
+      throw new NullPointerException("data must not be null");
+    }
+
+    final BinaryTreeKnot parentKnotOfData = internalSearchForParent(data);
+    if (parentKnotOfData == null) {
+      return false;
+    }
+
+    if (data < parentKnotOfData.getData()) {
+      final BinaryTreeKnot leftChild = parentKnotOfData.getLeftChild();
+      if (data.equals(leftChild.getData())) {
+        if (!leftChild.hasLeftChild() && !leftChild.hasRightChild()) {
+          parentKnotOfData.setLeftChild(null);
+          return true;
+        }
+      }
+      return false;
+    }
+
+    final BinaryTreeKnot rightChild = parentKnotOfData.getRightChild();
+    if (data.equals(rightChild.getData())) {
+      if (!rightChild.hasLeftChild() && !rightChild.hasRightChild()) {
+        parentKnotOfData.setRightChild(null);
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
@@ -40,6 +67,9 @@ public final class BinaryTree implements Tree<Integer> {
     printItemsTraverseInOrder(root);
   }
 
+  /**
+   * Symmetrische Reihenfolge, folgt der Sortierung des Baumes
+   */
   private void printItemsTraverseInOrder(final BinaryTreeKnot knot) {
     if (knot == null) {
       LOG.trace("endOfPath");
@@ -52,16 +82,65 @@ public final class BinaryTree implements Tree<Integer> {
     printItemsTraverseInOrder(knot.getRightChild());
   }
 
+  public void printItemsTraversePreOrder() {
+    LOG.info("---------- printItemsTraversePreOrder ----------");
+    printItemsTraversePreOrder(root);
+  }
+
+  /**
+   * Hauptreihenfolge, zuerst Knoten (wurzel, dann linker Teilbaum, dann rechter Teilbaum
+   */
+  private void printItemsTraversePreOrder(final BinaryTreeKnot knot) {
+    if (knot == null) {
+      LOG.trace("endOfPath");
+      return;
+    }
+    LOG.trace("handle: " + knot.getData());
+    LOG.info(knot);
+
+    LOG.trace("traverse left child of: " + knot.getData());
+    printItemsTraversePreOrder(knot.getLeftChild());
+    LOG.trace("traverse right child of: " + knot.getData());
+    printItemsTraversePreOrder(knot.getRightChild());
+  }
+
+  public void printItemsTraversePostOrder() {
+    LOG.info("---------- printItemsTraversePostOrder ----------");
+    printItemsTraversePostOrder(root);
+  }
+
+  /**
+   * Nebenreihenfolge, zuerst linker Teilbaum, dann rechter Teilbaum, dann Knoten (Wurzel)
+   */
+  private void printItemsTraversePostOrder(final BinaryTreeKnot knot) {
+    if (knot == null) {
+      LOG.trace("endOfPath");
+      return;
+    }
+
+    LOG.trace("traverse left child of: " + knot.getData());
+    printItemsTraversePostOrder(knot.getLeftChild());
+    LOG.trace("traverse right child of: " + knot.getData());
+    printItemsTraversePostOrder(knot.getRightChild());
+
+    LOG.trace("handle: " + knot.getData());
+    LOG.info(knot);
+  }
+
   public Integer search(final Integer data) {
     if (data == null) {
       LOG.trace("Fast exit since data is null");
       return null;
     }
-    final BinaryTreeKnot binaryTreeKnot = internalSearch(new BinaryTreeKnot(data, null, null));
+    final BinaryTreeKnot binaryTreeKnot = internalSearch(data);
     if (binaryTreeKnot == null) {
       return null;
     }
     return binaryTreeKnot.getData();
+  }
+
+  private BinaryTreeKnot internalSearch(final Integer data) {
+    return internalSearch(new BinaryTreeKnot(data, null, null));
   }
 
   private BinaryTreeKnot internalSearch(final BinaryTreeKnot data) {
@@ -83,6 +162,32 @@ public final class BinaryTree implements Tree<Integer> {
     }
     LOG.trace("Data not found.");
     return null;
+  }
+
+  private BinaryTreeKnot internalSearchForParent(final Integer data) {
+    return internalSearchForParent(new BinaryTreeKnot(data, null, null));
+  }
+
+  private BinaryTreeKnot internalSearchForParent(final BinaryTreeKnot data) {
+    LOG.trace("Find parent of knot: {}", data);
+    BinaryTreeKnot parent = null;
+    BinaryTreeKnot knot = root;
+    while (knot != null) {
+      if (knot.equals(data)) {
+        return parent;
+      }
+
+      parent = knot;
+
+      if (dataShouldBeLeftChildOf(data, knot)) {
+        if (!knot.hasLeftChild()) return null;
+        knot = knot.getLeftChild();
+      } else {
+        if (!knot.hasRightChild()) return null;
+        knot = knot.getRightChild();
+      }
+    }
+    return parent;
   }
 
   private void addKnotAtCorrectPosition(final BinaryTreeKnot newKnot) {
@@ -139,7 +244,7 @@ public final class BinaryTree implements Tree<Integer> {
 
   @Override
   public String toString() {
-    return "BinaryTree{" + "height=" + height + ", size=" + size + ", root=" + root + '}';
+    return "BinaryTree[root=" + root + ']';
   }
 
   public int size() {

@@ -17,8 +17,9 @@ public interface Tree<E> {
    * Removes data from the {@link Tree}.
    *
    * @param data object of type {@link E} to be removed from the {@link Tree}
+   * @return true if {@param data} was in {@link Tree} and has been removed, false if {@param data} was not found in {@link Tree}
    */
-  void remove(final E data);
+  boolean remove(final E data);
 
   /**
    * To check if data is available in the {@link Tree}.

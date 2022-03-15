@@ -9,6 +9,7 @@ import java.util.List;
 import static ch.hslu.ad.exceptionHandling.ExceptionTestHelpers.assertThrowsExactly;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -161,9 +162,78 @@ class BinaryTreeTest {
   }
 
   @Test
-  void printItemsWithDifferentTraverses() {
+  void printItemsWithDifferentTraverses_filledTree() {
     tree = getInitializedTree();
-
     tree.printItemsTraverseInOrder();
+    tree.printItemsTraversePreOrder();
+    tree.printItemsTraversePostOrder();
+  }
+
+  @Test
+  void printItemsWithDifferentTraverses_emptyTree() {
+    tree = new BinaryTree();
+    tree.printItemsTraverseInOrder();
+    tree.printItemsTraversePreOrder();
+    tree.printItemsTraversePostOrder();
+  }
+
+  @Test
+  void printItemsWithDifferentTraverses_treeWithRootOnly() {
+    tree = new BinaryTree();
+    tree.add(8);
+    tree.printItemsTraverseInOrder();
+    tree.printItemsTraversePreOrder();
+    tree.printItemsTraversePostOrder();
+  }
+
+  @Test
+  void removeElement_elementNotInTree_returnFalseAllElementsStillInTree() {
+    tree = getInitializedTree();
+    final List<Integer> dataInTree = dataOfInitializedTree();
+    int toBeRemoved = 100;
+    assertThat(toBeRemoved).isNotIn(dataInTree);
+
+    final boolean result = tree.remove(toBeRemoved);
+    assertFalse(result);
+    assertFalse(tree.contains(toBeRemoved));
+
+    dataInTree.forEach(dataPoint -> {
+      assertTrue(tree.contains(dataPoint));
+    });
+  }
+
+
+  @Test
+  void removeElement_removeLeafWhichWasLeftChild_returnTrueLeafRemovedOtherElementsStillInTree() {
+    tree = getInitializedTree();
+    final List<Integer> dataInTree = dataOfInitializedTree();
+    int toBeRemoved = 3;
+    assertThat(toBeRemoved).isIn(dataInTree);
+    final boolean result = tree.remove(toBeRemoved);
+    assertTrue(result);
+    assertFalse(tree.contains(toBeRemoved));
+
+    dataInTree.forEach(dataPoint -> {
+      if (dataPoint != toBeRemoved) {
+        assertTrue(tree.contains(dataPoint));
+      }
+    });
+  }
+
+  @Test
+  void removeElement_removeLeafWhichWasRightChild_returnTrueLeafRemovedOtherElementsStillInTree() {
+    tree = getInitializedTree();
+    final List<Integer> dataInTree = dataOfInitializedTree();
+    int toBeRemoved = 13;
+    assertThat(toBeRemoved).isIn(dataInTree);
+    final boolean result = tree.remove(toBeRemoved);
+    assertTrue(result);
+    assertFalse(tree.contains(toBeRemoved));
+
+    dataInTree.forEach(dataPoint -> {
+      if (dataPoint != toBeRemoved) {
+        assertTrue(tree.contains(dataPoint));
+      }
+    });
   }
 }
