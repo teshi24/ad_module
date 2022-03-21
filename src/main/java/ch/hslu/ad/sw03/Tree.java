@@ -1,6 +1,6 @@
 package ch.hslu.ad.sw03;
 
-import ch.hslu.ad.sw03.exceptionHandling.DuplicateElementException;
+import ch.hslu.ad.exceptionHandling.DuplicateElementException;
 
 public interface Tree<E> {
 

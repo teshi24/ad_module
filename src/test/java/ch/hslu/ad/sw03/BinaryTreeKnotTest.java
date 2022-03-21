@@ -1,6 +1,6 @@
 package ch.hslu.ad.sw03;
 
-import ch.hslu.ad.sw03.exceptionHandling.ComparisonException;
+import ch.hslu.ad.exceptionHandling.ComparisonException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 

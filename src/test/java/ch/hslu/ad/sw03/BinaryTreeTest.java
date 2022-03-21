@@ -1,6 +1,6 @@
 package ch.hslu.ad.sw03;
 
-import ch.hslu.ad.sw03.exceptionHandling.DuplicateElementException;
+import ch.hslu.ad.exceptionHandling.DuplicateElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

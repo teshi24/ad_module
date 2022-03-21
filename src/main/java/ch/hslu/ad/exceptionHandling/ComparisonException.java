@@ -1,4 +1,4 @@
-package ch.hslu.ad.sw03.exceptionHandling;
+package ch.hslu.ad.exceptionHandling;
 
 public class ComparisonException extends IllegalArgumentException {
 

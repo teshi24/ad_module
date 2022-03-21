@@ -1,6 +1,6 @@
 package ch.hslu.ad.sw03;
 
-import ch.hslu.ad.sw03.exceptionHandling.ComparisonException;
+import ch.hslu.ad.exceptionHandling.ComparisonException;
 
 final class BinaryTreeKnot implements Comparable<BinaryTreeKnot> {
   private final Integer data;

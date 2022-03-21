@@ -1,6 +1,6 @@
 package ch.hslu.ad.sw03;
 
-import ch.hslu.ad.sw03.exceptionHandling.DuplicateElementException;
+import ch.hslu.ad.exceptionHandling.DuplicateElementException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
