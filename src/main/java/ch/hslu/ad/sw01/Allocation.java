@@ -1,7 +1,5 @@
 package ch.hslu.ad.sw01;
 
-import java.util.Objects;
-
 /**
  * Input AD SW02 - Speicherverwaltung --> 2 Datenstrukturen, 1 zeigt freie Plätze an und die andere die belegten Stellen
  * effizient in Speicher schreiben will --> soll ja effizient sein, also fortlaufend, können so arithmetisch startposition wählen
@@ -51,7 +49,7 @@ public final class Allocation implements Comparable<Allocation> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(address);
+    return address;
   }
 
   @Override

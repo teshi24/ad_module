@@ -127,6 +127,7 @@
  *
  *
  *
+ * Bankaccount mit AtomicInteger -> dann müssen die Methoden nicht mehr synchronized werden, weil dann ja schon der Wert selber threadsafe ist
  *
  */
 package ch.hslu.ad.sw03;
