@@ -1,5 +1,5 @@
 /**
- * 1 Grundlegende Zusammenhänge
+ * Aufgabe 1 - Grundlegende Zusammenhänge
  * 1.3
  * a) Triangle Klasse - Dreieck-Objekte, definiert durch 3 Eckpunkte (x/y)-Koordinaten
  *    Mögliche Totale Ordnungen:
@@ -37,6 +37,31 @@
  *      -> Sorts the specified range of the specified array of objects according to the order induced by the specified comparator.
  *    -> alle sind stabile, iterative mergesort  s
  *
+ * Aufgabe 2 - Entscheidungsbaum
+ * 2.3
+ * geg: n = 3
+ *
+ * a)                                         D1 < D2
+ *              D2 < D3                                      D1 < D3
+ *    [D1, D2, D3]             D1 < D3             [D2, D1, D3]             D2 < D3
+ *                   [D1, D3, D2]   [D3, D1, D2]                  [D2, D3, D1]   [D3, D2, D1]
+ *
+ *
+ * a2)                                        D1 < D2
+ *              D2 < D3                                                     D2 < D3
+ *    [D1, D2, D3]             D1 < D3                       D1 < D3             [D3, D2, D1]
+ *                  [D1, D3, D2]    [D3, D1, D2]   [D2, D1, D3]   [D2, D3, D1]
+ *
+ *
+ * b) B Blätter = 6
+ *    h Höhe    = 4
+ *    h >= ld(B) + 1
+ *    4 >= ld(6) + 1
+ *    4 >= 2.585 + 1
+ *    4 >= 3.585     --> korrekt
+ *
+ * c) AS mögliche Ausgangssituationen = n! = 3! = 6
+ *    mind. Anzahl Vergleiche für alle AS = t Tiefe des Baumes = 3
  *
  */
 package ch.hslu.ad.sw08;
