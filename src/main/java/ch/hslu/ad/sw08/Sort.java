@@ -1,5 +1,7 @@
 package ch.hslu.ad.sw08;
 
+import java.util.Arrays;
+
 import static java.lang.Integer.MAX_VALUE;
 
 public class Sort {
@@ -14,6 +16,11 @@ public class Sort {
    * @throws NullPointerException if {@param inputArray} is null
    */
   public static void insertionSort(final int[] array) {
+    // insertionSort(array, 1);
+    insertionSortOptimized(array);
+  }
+
+  private static void insertionSortOptimized(final int[] array) {
     // T ~ a
     if (array.length <= 0) {
       return;
@@ -111,20 +118,66 @@ public class Sort {
     }
   }
 
+  private static int[] hibbardNrs = initializeHibbardNrs();
 
-  public static void shellSort(final int[] array) {
-    for (int iLastUnsortedElement = array.length - 1; iLastUnsortedElement > 0; iLastUnsortedElement--) {
-      for (int i = 0; i < iLastUnsortedElement; i++) {
-        final int firstElement = array[i];
-        if (firstElement > array[i + 1]) {
-          array[i] = array[i + 1];
-          array[i + 1] = firstElement;
+  private static int[] initializeHibbardNrs() {
+    final int[] hibbardNrs = new int[31]; // hibbardNr nr 32 = 2147483647, biggest hibbardNr in int range
+    hibbardNrs[0] = 1;
+    for (int i = 1; i < hibbardNrs.length; i++) {
+      hibbardNrs[i] = hibbardNrs[i - 1] * 2 + 1;
+    }
+    return hibbardNrs;
+  }
+
+  private static void insertionSort(final int[] array, final int stepSize) {
+    if (array.length <= 0) {
+      return;
+    }
+    int element;
+    int iSortedArrayPart;
+
+    for (int j = 0; j < array.length; j++) {
+      for (int i = j + stepSize; i < array.length; i += stepSize) {
+        element = array[i];
+
+        iSortedArrayPart = i; // array[0]..array[iSortedArrayPart - 1] is already sorted
+        while ((iSortedArrayPart - stepSize) > -1 && array[iSortedArrayPart - stepSize] > element) {
+          array[iSortedArrayPart] = array[iSortedArrayPart - stepSize]; // shift element to the right
+          iSortedArrayPart -= stepSize; // go further left
         }
+        array[iSortedArrayPart] = element; // insertElement
       }
     }
   }
 
+  /**
+   * shellSort using HibbardFolge --> 2^k-1
+   *
+   * @param array
+   */
+  // probably smth wrong with this - best case scenario
+  public static void shellSort(final int[] array) {
+    if (array.length <= 0) {
+      return;
+    }
 
+    int hibbardNrIndex = -1;
+    for (int i = 0; i < Sort.hibbardNrs.length; i++) {
+      if (Sort.hibbardNrs[i] >= array.length) {
+        break;
+      }
+      hibbardNrIndex = i;
+    }
+
+    for (; hibbardNrIndex > -1; hibbardNrIndex--) {
+      int hibbardNr = Sort.hibbardNrs[hibbardNrIndex];
+      insertionSort(array, hibbardNr);
+    }
+  }
+
+  private static void printNrArray(final int[] array) {
+    System.out.println(String.join(", ", Arrays.stream(array).mapToObj(String::valueOf).toArray(String[]::new)));
+  }
 
   /**
    * Sorts the given array using insertion sort {@see
