@@ -2,6 +2,7 @@ package ch.hslu.ad.sw08;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -139,6 +140,128 @@ class SortTest {
       final int[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
       final int[] arrayCopyForConvenience = testArray.clone();
       Sort.selectionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSort_null_throwsNullPointerException() {
+      assertThrowsExactly(NullPointerException.class, //
+                          () -> Sort.bubbleSort(null), //
+                          "Cannot read the array length because \"array\" is null");
+    }
+
+    @Test
+    void bubbleSort_emptyArrayLength0_arrayIsSorted() {
+      final int[] testArray = new int[0];
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSort_initializedArrayLengthX_arrayIsSorted() {
+      final int[] testArray = new int[10];
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSort_sortedArrayAkaBestCase_arrayIsSorted() {
+      final int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSort_contains1Element_arrayIsSorted() {
+      final int[] testArray = {10};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSort_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
+      final int[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSort_unsortedArrayAkaAverageCase_arrayIsSorted() {
+      final int[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSortOptimized_null_throwsNullPointerException() {
+      assertThrowsExactly(NullPointerException.class, //
+                          () -> Sort.bubbleSortBestCaseOptimized(null), //
+                          "Cannot read the array length because \"array\" is null");
+    }
+
+    @Test
+    void bubbleSortOptimized_emptyArrayLength0_arrayIsSorted() {
+      final int[] testArray = new int[0];
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSortBestCaseOptimized(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSortOptimized_initializedArrayLengthX_arrayIsSorted() {
+      final int[] testArray = new int[10];
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSortBestCaseOptimized(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSortOptimized_sortedArrayAkaBestCase_arrayIsSorted() {
+      final int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSortBestCaseOptimized(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSortOptimized_contains1Element_arrayIsSorted() {
+      final int[] testArray = {10};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSortBestCaseOptimized(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSortOptimized_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
+      final int[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSortBestCaseOptimized(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void bubbleSortOptimized_unsortedArrayAkaAverageCase_arrayIsSorted() {
+      final int[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.bubbleSortBestCaseOptimized(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
@@ -319,61 +442,66 @@ class SortTest {
   class PerformanceTest {
     private final static Logger LOG = LogManager.getLogger(PerformanceTest.class);
 
-    final static int SMALL_ARRAY = 5_123;
-    final static int MEDIUM_ARRAY = 10_246;
-    final static int LARGE_ARRAY = 20_492;
+    // final static int SMALL_ARRAY = 5_123;
+    // final static int MEDIUM_ARRAY = 10_246;
+    // final static int LARGE_ARRAY = 20_492;
 
     // use those you want also to show the difference with Comparable Items
-    // final static int SMALL_ARRAY = 2_123;
-    // final static int MEDIUM_ARRAY = 4_246;
-    // final static int LARGE_ARRAY = 8_492;
+    final static int SMALL_ARRAY = 2_123;
+    final static int MEDIUM_ARRAY = 4_246;
+    final static int LARGE_ARRAY = 8_492;
 
     final static boolean MEASURE_SMALL_ARRAY = true;
     final static boolean MEASURE_MEDIUM_ARRAY = true;
     final static boolean MEASURE_LARGE_ARRAY = true;
-    final static boolean PRINT_ARRAY_SIZES = false;
 
     final static int RUNS = 100;
 
+    @BeforeAll
+    static void beforeAll() {
+      LOG.info("Amount of items in small array:     " + SMALL_ARRAY);
+      LOG.info("Amount of items in medium array:    " + MEDIUM_ARRAY);
+      LOG.info("Amount of items in large array:     " + LARGE_ARRAY);
+      LOG.info("");
+    }
+
     @Nested
-    class InsertionSort {
+    class InsertionSort extends PerformanceTestCase {
       final static String ALGORITHM_NAME = "Sort::insertionSort(int[])";
-      final Consumer<int[]> ALGORITHM = Sort::insertionSort;
+      final static Consumer<int[]> ALGORITHM = Sort::insertionSort;
 
-      @Test
-      void insertionSort_bestCase_aka_sorted() {
-        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayBestCase, ALGORITHM_NAME, "bestCase");
-      }
-
-      @Test
-      void insertionSort_averageCase_aka_random() {
-        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayAverageCase, ALGORITHM_NAME, "random");
-      }
-
-      @Test
-      void insertionSort_worstCase_aka_ReverseSorted() {
-        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayWorstCase, ALGORITHM_NAME, "worstCase");
+      private InsertionSort() {
+        super(ALGORITHM_NAME, ALGORITHM);
       }
     }
 
     @Nested
-    class SelectionSort {
+    class SelectionSort extends PerformanceTestCase {
       final static String ALGORITHM_NAME = "Sort::selectionSort(int[])";
-      final Consumer<int[]> ALGORITHM = Sort::selectionSort;
+      final static Consumer<int[]> ALGORITHM = Sort::selectionSort;
 
-      @Test
-      void selectionSort_bestCase_aka_sorted() {
-        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayBestCase, ALGORITHM_NAME, "bestCase");
+      private SelectionSort() {
+        super(ALGORITHM_NAME, ALGORITHM);
       }
+    }
 
-      @Test
-      void selectionSort_averageCase_aka_random() {
-        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayAverageCase, ALGORITHM_NAME, "random");
+    @Nested
+    class BubbleSort extends PerformanceTestCase {
+      final static String ALGORITHM_NAME = "Sort::bubbleSort(int[])";
+      final static Consumer<int[]> ALGORITHM = Sort::bubbleSort;
+
+      private BubbleSort() {
+        super(ALGORITHM_NAME, ALGORITHM);
       }
+    }
 
-      @Test
-      void selectionSort_worstCase_aka_ReverseSorted() {
-        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayWorstCase, ALGORITHM_NAME, "worstCase");
+    @Nested
+    class BubbleSortOptimized extends PerformanceTestCase {
+      final static String ALGORITHM_NAME = "Sort::bubbleSortOptimized(int[])";
+      final static Consumer<int[]> ALGORITHM = Sort::bubbleSortBestCaseOptimized;
+
+      private BubbleSortOptimized() {
+        super(ALGORITHM_NAME, ALGORITHM);
       }
     }
 
@@ -457,60 +585,80 @@ class SortTest {
       LOG.info("Time on small array (ms):           " + runTimeSmallArray);
       LOG.info("Time on medium array (ms):          " + runTimeMediumArray);
       LOG.info("Time on large array (ms):           " + runTimeLargeArray);
-      if (PRINT_ARRAY_SIZES) {
-        LOG.info("Amount of items in small array:     " + SMALL_ARRAY);
-        LOG.info("Amount of items in medium array:    " + MEDIUM_ARRAY);
-        LOG.info("Amount of items in large array:     " + LARGE_ARRAY);
-      }
       LOG.info("");
+    }
+
+    class PerformanceTestCase {
+      final String ALGORITHM_NAME;
+      final Consumer<int[]> ALGORITHM;
+
+      public PerformanceTestCase(final String algorithmName, final Consumer<int[]> algorithm) {
+        ALGORITHM_NAME = algorithmName;
+        ALGORITHM = algorithm;
+      }
+
+      @Test
+      void bestCase_aka_sorted() {
+        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayBestCase, ALGORITHM_NAME, "bestCase");
+      }
+
+      @Test
+      void averageCase_aka_random() {
+        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayAverageCase, ALGORITHM_NAME, "random");
+      }
+
+      @Test
+      void worstCase_aka_reverseSorted() {
+        measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayWorstCase, ALGORITHM_NAME, "worstCase");
+      }
     }
 
     // @Nested
     class ComparableAlgorithms {
 
       @Nested
-      class InsertionSortComparable {
+      class InsertionSortComparable extends PerformanceTestCaseComparable {
         final static String ALGORITHM_NAME = "Sort::insertionSortComparable(Comparable<E>[])";
-        final Consumer<Integer[]> ALGORITHM = Sort::insertionSortComparable;
+        final static Consumer<Integer[]> ALGORITHM = Sort::insertionSortComparable;
 
-        @Test
-        void insertionSortComparable_bestCase_aka_sorted() {
-          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayBestCaseBoxed, ALGORITHM_NAME,
-                              "bestCase");
-        }
-
-        @Test
-        void insertionSortComparable_averageCase_aka_random() {
-          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayAverageCaseBoxed, ALGORITHM_NAME,
-                              "random");
-        }
-
-        @Test
-        void insertionSortComparable_worstCase_aka_ReverseSorted() {
-          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayWorstCaseBoxed, ALGORITHM_NAME,
-                              "worstCase");
+        private InsertionSortComparable() {
+          super(ALGORITHM_NAME, ALGORITHM);
         }
       }
 
       @Nested
-      class InsertionSortComparableNullSafe {
+      class InsertionSortComparableNullSafe extends PerformanceTestCaseComparable {
         final static String ALGORITHM_NAME = "Sort::insertionSortComparableNullSafe(Comparable<E>[])";
-        final Consumer<Integer[]> ALGORITHM = Sort::insertionSortComparableNullSafe;
+        final static Consumer<Integer[]> ALGORITHM = Sort::insertionSortComparableNullSafe;
+
+        private InsertionSortComparableNullSafe() {
+          super(ALGORITHM_NAME, ALGORITHM);
+        }
+      }
+
+      class PerformanceTestCaseComparable {
+        final String ALGORITHM_NAME;
+        final Consumer<Integer[]> ALGORITHM;
+
+        public PerformanceTestCaseComparable(final String algorithmName, final Consumer<Integer[]> algorithm) {
+          ALGORITHM_NAME = algorithmName;
+          ALGORITHM = algorithm;
+        }
 
         @Test
-        void insertionSortComparable_bestCase_aka_sorted() {
+        void bestCase_aka_sorted() {
           measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayBestCaseBoxed, ALGORITHM_NAME,
                               "bestCase");
         }
 
         @Test
-        void insertionSortComparable_averageCase_aka_random() {
+        void averageCase_aka_random() {
           measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayAverageCaseBoxed, ALGORITHM_NAME,
                               "random");
         }
 
         @Test
-        void insertionSortComparable_worstCase_aka_ReverseSorted() {
+        void worstCase_aka_reverseSorted() {
           measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayWorstCaseBoxed, ALGORITHM_NAME,
                               "worstCase");
         }

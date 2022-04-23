@@ -82,6 +82,35 @@ public class Sort {
   }
   // T ~ n * n ~ n^2
 
+  public static void bubbleSort(final int[] array) {
+    for (int iLastUnsortedElement = array.length - 1; iLastUnsortedElement > 0; iLastUnsortedElement--) {
+      for (int i = 0; i < iLastUnsortedElement; i++) {
+        final int firstElement = array[i];
+        if (firstElement > array[i + 1]) {
+          array[i] = array[i + 1];
+          array[i + 1] = firstElement;
+        }
+      }
+    }
+  }
+
+  public static void bubbleSortBestCaseOptimized(final int[] array) {
+    for (int iLastUnsortedElement = array.length - 1; iLastUnsortedElement > 0; iLastUnsortedElement--) {
+      boolean exchangeMade = false;
+      for (int i = 0; i < iLastUnsortedElement; i++) {
+        final int firstElement = array[i];
+        if (firstElement > array[i + 1]) {
+          array[i] = array[i + 1];
+          array[i + 1] = firstElement;
+          exchangeMade = true;
+        }
+      }
+      if (!exchangeMade) {
+        return;
+      }
+    }
+  }
+
   /**
    * Sorts the given array using insertion sort {@see
    * <a href="https://www.youtube.com/watch?v=JU767SDMDvA&ab_channel=MichaelSambol">explanation</a}
