@@ -206,14 +206,14 @@ class SortTest {
     }
 
     @Test
-    void bubbleSortOptimized_null_throwsNullPointerException() {
+    void bubbleSortBestCaseOptimized_null_throwsNullPointerException() {
       assertThrowsExactly(NullPointerException.class, //
                           () -> Sort.bubbleSortBestCaseOptimized(null), //
                           "Cannot read the array length because \"array\" is null");
     }
 
     @Test
-    void bubbleSortOptimized_emptyArrayLength0_arrayIsSorted() {
+    void bubbleSortBestCaseOptimized_emptyArrayLength0_arrayIsSorted() {
       final int[] testArray = new int[0];
       final int[] arrayCopyForConvenience = testArray.clone();
       Sort.bubbleSortBestCaseOptimized(testArray);
@@ -222,7 +222,7 @@ class SortTest {
     }
 
     @Test
-    void bubbleSortOptimized_initializedArrayLengthX_arrayIsSorted() {
+    void bubbleSortBestCaseOptimized_initializedArrayLengthX_arrayIsSorted() {
       final int[] testArray = new int[10];
       final int[] arrayCopyForConvenience = testArray.clone();
       Sort.bubbleSortBestCaseOptimized(testArray);
@@ -231,7 +231,7 @@ class SortTest {
     }
 
     @Test
-    void bubbleSortOptimized_sortedArrayAkaBestCase_arrayIsSorted() {
+    void bubbleSortBestCaseOptimized_sortedArrayAkaBestCase_arrayIsSorted() {
       final int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       final int[] arrayCopyForConvenience = testArray.clone();
       Sort.bubbleSortBestCaseOptimized(testArray);
@@ -240,7 +240,7 @@ class SortTest {
     }
 
     @Test
-    void bubbleSortOptimized_contains1Element_arrayIsSorted() {
+    void bubbleSortBestCaseOptimized_contains1Element_arrayIsSorted() {
       final int[] testArray = {10};
       final int[] arrayCopyForConvenience = testArray.clone();
       Sort.bubbleSortBestCaseOptimized(testArray);
@@ -249,7 +249,7 @@ class SortTest {
     }
 
     @Test
-    void bubbleSortOptimized_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
+    void bubbleSortBestCaseOptimized_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
       final int[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
       final int[] arrayCopyForConvenience = testArray.clone();
       Sort.bubbleSortBestCaseOptimized(testArray);
@@ -258,7 +258,7 @@ class SortTest {
     }
 
     @Test
-    void bubbleSortOptimized_unsortedArrayAkaAverageCase_arrayIsSorted() {
+    void bubbleSortBestCaseOptimized_unsortedArrayAkaAverageCase_arrayIsSorted() {
       final int[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
       final int[] arrayCopyForConvenience = testArray.clone();
       Sort.bubbleSortBestCaseOptimized(testArray);
@@ -459,9 +459,15 @@ class SortTest {
 
     @BeforeAll
     static void beforeAll() {
-      LOG.info("Amount of items in small array:     " + SMALL_ARRAY);
-      LOG.info("Amount of items in medium array:    " + MEDIUM_ARRAY);
-      LOG.info("Amount of items in large array:     " + LARGE_ARRAY);
+      if (MEASURE_SMALL_ARRAY) {
+        LOG.info("Amount of items in small array:     " + SMALL_ARRAY);
+      }
+      if (MEASURE_MEDIUM_ARRAY) {
+        LOG.info("Amount of items in medium array:    " + MEDIUM_ARRAY);
+      }
+      if (MEASURE_LARGE_ARRAY) {
+        LOG.info("Amount of items in large array:     " + LARGE_ARRAY);
+      }
       LOG.info("");
     }
 
@@ -496,11 +502,11 @@ class SortTest {
     }
 
     @Nested
-    class BubbleSortOptimized extends PerformanceTestCase {
-      final static String ALGORITHM_NAME = "Sort::bubbleSortOptimized(int[])";
+    class BubbleSortBestCaseOptimized extends PerformanceTestCase {
+      final static String ALGORITHM_NAME = "Sort::bubbleSortBestCaseOptimized(int[])";
       final static Consumer<int[]> ALGORITHM = Sort::bubbleSortBestCaseOptimized;
 
-      private BubbleSortOptimized() {
+      private BubbleSortBestCaseOptimized() {
         super(ALGORITHM_NAME, ALGORITHM);
       }
     }
@@ -582,9 +588,15 @@ class SortTest {
                               final long runTimeLargeArray) {
       LOG.info("Runtime Measures for:               " + algorithm);
       LOG.info("Case:                               " + caseUsed);
-      LOG.info("Time on small array (ms):           " + runTimeSmallArray);
-      LOG.info("Time on medium array (ms):          " + runTimeMediumArray);
-      LOG.info("Time on large array (ms):           " + runTimeLargeArray);
+      if (MEASURE_SMALL_ARRAY) {
+        LOG.info("Time on small array (ms):           " + runTimeSmallArray);
+      }
+      if (MEASURE_MEDIUM_ARRAY) {
+        LOG.info("Time on medium array (ms):          " + runTimeMediumArray);
+      }
+      if (MEASURE_LARGE_ARRAY) {
+        LOG.info("Time on large array (ms):           " + runTimeLargeArray);
+      }
       LOG.info("");
     }
 
