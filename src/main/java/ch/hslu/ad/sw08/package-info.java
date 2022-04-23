@@ -63,5 +63,14 @@
  * c) AS mögliche Ausgangssituationen = n! = 3! = 6
  *    mind. Anzahl Vergleiche für alle AS = t Tiefe des Baumes = 3
  *
+ * A4 - Direktes Auswählen
+ * 4.3
+ * b)                    [8(1),    5, 8(2),    1]
+ *    1 kleinster ->     [   1,    5, 8(2), 8(1)]
+ *    sortiert gemäss Kriterien, aber das 1. 8 ist nach der 2. 8
+ * c) nein, die Unterscheidung zwischen Best Case, Worst Case und Average Case ist nicht sinnvoll beim
+ *    direkten Auswählen. Egal, wie die Anordnung ist, es muss immer der gesamte unsortierte Array durchsucht werden,
+ *    um den kleinsten Schlüssel zu finden. Die Aufwände für die Vergleiche und Verschiebungen, die die Cases noch unterscheiden,
+ *    sind verhältnismässig klein und daher vernachlässigbar.
  */
 package ch.hslu.ad.sw08;

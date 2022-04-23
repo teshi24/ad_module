@@ -22,67 +22,6 @@ class SortTest {
     private final Comparator<String> nullSafeStringComparator = (e1, e2) -> e2 == null ? -1 : e1.compareTo(e2);
 
     @Test
-    void insertionSortIntArrayOnly_null_throwsNullPointerException() {
-      assertThrowsExactly(NullPointerException.class, //
-                          () -> Sort.insertionSortIntArrayOnly(null), //
-                          "Cannot read the array length because \"array\" is null");
-    }
-
-    @Test
-    void insertionSortIntArrayOnly_emptyArrayLength0_arrayIsSorted() {
-      final int[] testArray = new int[0];
-      final int[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortIntArrayOnly(testArray);
-      assertThat(testArray).isSorted();
-      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
-    }
-
-    @Test
-    void insertionSortIntArrayOnly_initializedArrayLengthX_arrayIsSorted() {
-      final int[] testArray = new int[10];
-      final int[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortIntArrayOnly(testArray);
-      assertThat(testArray).isSorted();
-      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
-    }
-
-    @Test
-    void insertionSortIntArrayOnly_sortedArrayAkaBestCase_arrayIsSorted() {
-      final int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      final int[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortIntArrayOnly(testArray);
-      assertThat(testArray).isSorted();
-      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
-    }
-
-    @Test
-    void insertionSortIntArrayOnly_contains1Element_arrayIsSorted() {
-      final int[] testArray = {10};
-      final int[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortIntArrayOnly(testArray);
-      assertThat(testArray).isSorted();
-      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
-    }
-
-    @Test
-    void insertionSortIntArrayOnly_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
-      final int[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-      final int[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortIntArrayOnly(testArray);
-      assertThat(testArray).isSorted();
-      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
-    }
-
-    @Test
-    void insertionSortIntArrayOnly_unsortedArrayAkaAverageCase_arrayIsSorted() {
-      final int[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
-      final int[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortIntArrayOnly(testArray);
-      assertThat(testArray).isSorted();
-      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
-    }
-
-    @Test
     void insertionSort_null_throwsNullPointerException() {
       assertThrowsExactly(NullPointerException.class, //
                           () -> Sort.insertionSort(null), //
@@ -90,41 +29,18 @@ class SortTest {
     }
 
     @Test
-    void insertionSort_differentTypesUsedInArray_throwsClassCastException() {
-      final ClassCastException comparisonException = assertThrows(ClassCastException.class, //
-                                                                  () -> Sort.insertionSort(new Comparable[]{1,
-                                                                                                            "Test"}));
-      assertThat(comparisonException.getMessage()).contains("class").contains("cannot be cast to class");
-    }
-
-    @Test
-    void insertionSort_initializedWithNullArrayLengthX_throwsRuntimeException() {
-      final String[] testArray = new String[10];
-      assertThrows(RuntimeException.class, //
-                   () -> Sort.insertionSort(testArray));
-    }
-
-    @Test
-    void insertionSort_initializedWithNullsBeside1ItemArrayLengthX_throwsRuntimeException() {
-      final String[] testArray = new String[10];
-      testArray[5] = "hello";
-      assertThrows(RuntimeException.class, //
-                   () -> Sort.insertionSort(testArray));
-    }
-
-    @Test
-    void insertionSort_initializedWithSomeValuesOnly_throwsRuntimeException() {
-      final String[] testArray = new String[10];
-      testArray[5] = "hello";
-      testArray[7] = "hi";
-      assertThrows(RuntimeException.class, //
-                   () -> Sort.insertionSort(testArray));
-    }
-
-    @Test
     void insertionSort_emptyArrayLength0_arrayIsSorted() {
-      final String[] testArray = new String[0];
-      final String[] arrayCopyForConvenience = testArray.clone();
+      final int[] testArray = new int[0];
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.insertionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void insertionSort_initializedArrayLengthX_arrayIsSorted() {
+      final int[] testArray = new int[10];
+      final int[] arrayCopyForConvenience = testArray.clone();
       Sort.insertionSort(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
@@ -132,8 +48,8 @@ class SortTest {
 
     @Test
     void insertionSort_sortedArrayAkaBestCase_arrayIsSorted() {
-      final Integer[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      final Integer[] arrayCopyForConvenience = testArray.clone();
+      final int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      final int[] arrayCopyForConvenience = testArray.clone();
       Sort.insertionSort(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
@@ -141,8 +57,8 @@ class SortTest {
 
     @Test
     void insertionSort_contains1Element_arrayIsSorted() {
-      final Integer[] testArray = {10};
-      final Integer[] arrayCopyForConvenience = testArray.clone();
+      final int[] testArray = {10};
+      final int[] arrayCopyForConvenience = testArray.clone();
       Sort.insertionSort(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
@@ -150,8 +66,8 @@ class SortTest {
 
     @Test
     void insertionSort_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
-      final Integer[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-      final Integer[] arrayCopyForConvenience = testArray.clone();
+      final int[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
       Sort.insertionSort(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
@@ -159,98 +75,241 @@ class SortTest {
 
     @Test
     void insertionSort_unsortedArrayAkaAverageCase_arrayIsSorted() {
-      final Integer[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
-      final Integer[] arrayCopyForConvenience = testArray.clone();
+      final int[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
       Sort.insertionSort(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_null_throwsNullPointerException() {
+    void selectionSort_null_throwsNullPointerException() {
       assertThrowsExactly(NullPointerException.class, //
-                          () -> Sort.insertionSortNullSafe(null), //
+                          () -> Sort.selectionSort(null), //
                           "Cannot read the array length because \"array\" is null");
     }
 
     @Test
-    void insertionSortNullSafe_differentTypesUsedInArray_throwsClassCastException() {
+    void selectionSort_emptyArrayLength0_arrayIsSorted() {
+      final int[] testArray = new int[0];
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.selectionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void selectionSort_initializedArrayLengthX_arrayIsSorted() {
+      final int[] testArray = new int[10];
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.selectionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void selectionSort_sortedArrayAkaBestCase_arrayIsSorted() {
+      final int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.selectionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void selectionSort_contains1Element_arrayIsSorted() {
+      final int[] testArray = {10};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.selectionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void selectionSort_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
+      final int[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.selectionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void selectionSort_unsortedArrayAkaAverageCase_arrayIsSorted() {
+      final int[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
+      final int[] arrayCopyForConvenience = testArray.clone();
+      Sort.selectionSort(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void insertionSortComparable_null_throwsNullPointerException() {
+      assertThrowsExactly(NullPointerException.class, //
+                          () -> Sort.insertionSortComparable(null), //
+                          "Cannot read the array length because \"array\" is null");
+    }
+
+    @Test
+    void insertionSortComparable_differentTypesUsedInArray_throwsClassCastException() {
       final ClassCastException comparisonException = assertThrows(ClassCastException.class, //
-                                                                  () -> Sort.insertionSortNullSafe(new Comparable[]{1
-                                                                    , "Test"}));
+                                                                  () -> Sort.insertionSortComparable(new Comparable[]{1, "Test"}));
       assertThat(comparisonException.getMessage()).contains("class").contains("cannot be cast to class");
     }
 
     @Test
-    void insertionSortNullSafe_emptyArrayLength0_arrayIsSorted() {
+    void insertionSortComparable_initializedWithNullArrayLengthX_throwsRuntimeException() {
+      final String[] testArray = new String[10];
+      assertThrows(RuntimeException.class, //
+                   () -> Sort.insertionSortComparable(testArray));
+    }
+
+    @Test
+    void insertionSortComparable_initializedWithNullsBeside1ItemArrayLengthX_throwsRuntimeException() {
+      final String[] testArray = new String[10];
+      testArray[5] = "hello";
+      assertThrows(RuntimeException.class, //
+                   () -> Sort.insertionSortComparable(testArray));
+    }
+
+    @Test
+    void insertionSortComparable_initializedWithSomeValuesOnly_throwsRuntimeException() {
+      final String[] testArray = new String[10];
+      testArray[5] = "hello";
+      testArray[7] = "hi";
+      assertThrows(RuntimeException.class, //
+                   () -> Sort.insertionSortComparable(testArray));
+    }
+
+    @Test
+    void insertionSortComparable_emptyArrayLength0_arrayIsSorted() {
       final String[] testArray = new String[0];
       final String[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+      Sort.insertionSortComparable(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_initializedWithNullArrayLengthX_insertionSortCanBeCalled() {
-      final String[] testArray = new String[10];
-      final String[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+    void insertionSortComparable_sortedArrayAkaBestCase_arrayIsSorted() {
+      final Integer[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      final Integer[] arrayCopyForConvenience = testArray.clone();
+      Sort.insertionSortComparable(testArray);
+      assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_initializedWithNullsBeside1ItemArrayLengthX_itemFirstAndNullItemsAreAtTheEnd() {
+    void insertionSortComparable_contains1Element_arrayIsSorted() {
+      final Integer[] testArray = {10};
+      final Integer[] arrayCopyForConvenience = testArray.clone();
+      Sort.insertionSortComparable(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void insertionSortComparable_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
+      final Integer[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+      final Integer[] arrayCopyForConvenience = testArray.clone();
+      Sort.insertionSortComparable(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void insertionSortComparable_unsortedArrayAkaAverageCase_arrayIsSorted() {
+      final Integer[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
+      final Integer[] arrayCopyForConvenience = testArray.clone();
+      Sort.insertionSortComparable(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void insertionSortComparableNullSafe_null_throwsNullPointerException() {
+      assertThrowsExactly(NullPointerException.class, //
+                          () -> Sort.insertionSortComparableNullSafe(null), //
+                          "Cannot read the array length because \"array\" is null");
+    }
+
+    @Test
+    void insertionSortComparableNullSafe_differentTypesUsedInArray_throwsClassCastException() {
+      final ClassCastException comparisonException = assertThrows(ClassCastException.class, //
+                                                                  () -> Sort.insertionSortComparableNullSafe(new Comparable[]{1, "Test"}));
+      assertThat(comparisonException.getMessage()).contains("class").contains("cannot be cast to class");
+    }
+
+    @Test
+    void insertionSortComparableNullSafe_emptyArrayLength0_arrayIsSorted() {
+      final String[] testArray = new String[0];
+      final String[] arrayCopyForConvenience = testArray.clone();
+      Sort.insertionSortComparableNullSafe(testArray);
+      assertThat(testArray).isSorted();
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void insertionSortComparableNullSafe_initializedWithNullArrayLengthX_insertionSortCanBeCalled() {
+      final String[] testArray = new String[10];
+      final String[] arrayCopyForConvenience = testArray.clone();
+      Sort.insertionSortComparableNullSafe(testArray);
+      assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
+    }
+
+    @Test
+    void insertionSortComparableNullSafe_initializedWithNullsBeside1ItemArrayLengthX_itemFirstAndNullItemsAreAtTheEnd() {
       final String[] testArray = new String[10];
       testArray[5] = "hello";
       final String[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+      Sort.insertionSortComparableNullSafe(testArray);
       assertThat(testArray).isSortedAccordingTo(nullSafeStringComparator);
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_initializedWithSomeValuesOnly_itemsSortedAndNullItemsAreAtTheEnd() {
+    void insertionSortComparableNullSafe_initializedWithSomeValuesOnly_itemsSortedAndNullItemsAreAtTheEnd() {
       final String[] testArray = new String[10];
       testArray[5] = "hello";
       testArray[7] = "hi";
       final String[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+      Sort.insertionSortComparableNullSafe(testArray);
       assertThat(testArray).isSortedAccordingTo(nullSafeStringComparator);
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_sortedArrayAkaBestCase_arrayIsSorted() {
+    void insertionSortComparableNullSafe_sortedArrayAkaBestCase_arrayIsSorted() {
       final Integer[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       final Integer[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+      Sort.insertionSortComparableNullSafe(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_contains1Element_arrayIsSorted() {
+    void insertionSortComparableNullSafe_contains1Element_arrayIsSorted() {
       final Integer[] testArray = {10};
       final Integer[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+      Sort.insertionSortComparableNullSafe(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
+    void insertionSortComparableNullSafe_reverseSortedArrayAkaWorstCase_arrayIsSorted() {
       final Integer[] testArray = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
       final Integer[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+      Sort.insertionSortComparableNullSafe(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
 
     @Test
-    void insertionSortNullSafe_unsortedArrayAkaAverageCase_arrayIsSorted() {
+    void insertionSortComparableNullSafe_unsortedArrayAkaAverageCase_arrayIsSorted() {
       final Integer[] testArray = {8, 10, 3, 5, 6, 4, 7, 9, 1};
       final Integer[] arrayCopyForConvenience = testArray.clone();
-      Sort.insertionSortNullSafe(testArray);
+      Sort.insertionSortComparableNullSafe(testArray);
       assertThat(testArray).isSorted();
       assertThat(testArray).containsExactlyInAnyOrder(arrayCopyForConvenience);
     }
@@ -260,12 +319,14 @@ class SortTest {
   class PerformanceTest {
     private final static Logger LOG = LogManager.getLogger(PerformanceTest.class);
 
-    // final static int SMALL_ARRAY = 4_123;
-    // final static int MEDIUM_ARRAY = 8_246;
-    // final static int LARGE_ARRAY = 16_492;
-    final static int SMALL_ARRAY = 2_123;
-    final static int MEDIUM_ARRAY = 4_246;
-    final static int LARGE_ARRAY = 8_492;
+    final static int SMALL_ARRAY = 5_123;
+    final static int MEDIUM_ARRAY = 10_246;
+    final static int LARGE_ARRAY = 20_492;
+
+    // use those you want also to show the difference with Comparable Items
+    // final static int SMALL_ARRAY = 2_123;
+    // final static int MEDIUM_ARRAY = 4_246;
+    // final static int LARGE_ARRAY = 8_492;
 
     final static boolean MEASURE_SMALL_ARRAY = true;
     final static boolean MEASURE_MEDIUM_ARRAY = true;
@@ -275,42 +336,9 @@ class SortTest {
     final static int RUNS = 100;
 
     @Nested
-    class InsertionSortIntArrayOnly {
-      final static String ALGORITHM_NAME = "Sort::insertionSortIntArrayOnly(int[])";
-      final Consumer<int[]> ALGORITHM = Sort::insertionSortIntArrayOnly;
-
-      @Test
-      void insertionSort_bestCase_aka_sorted() {
-        measureRunTimeUnboxed(ALGORITHM, this::setupMasterArrayBestCase, ALGORITHM_NAME, "bestCase");
-      }
-
-      private int[] setupMasterArrayBestCase(final int arraySize) {
-        return Arrays.stream(PerformanceTest.setupMasterArrayBestCase(arraySize)).mapToInt(Integer::intValue).toArray();
-      }
-
-      @Test
-      void insertionSort_averageCase_aka_random() {
-        measureRunTimeUnboxed(ALGORITHM, this::setupMasterArrayAverageCase, ALGORITHM_NAME, "random");
-      }
-
-      private int[] setupMasterArrayAverageCase(final int arraySize) {
-        return Arrays.stream(PerformanceTest.setupMasterArrayAverageCase(arraySize)).mapToInt(Integer::intValue).toArray();
-      }
-
-      @Test
-      void insertionSort_worstCase_aka_ReverseSorted() {
-        measureRunTimeUnboxed(ALGORITHM, this::setupMasterArrayWorstCase, ALGORITHM_NAME, "worstCase");
-      }
-
-      private int[] setupMasterArrayWorstCase(final int arraySize) {
-        return Arrays.stream(PerformanceTest.setupMasterArrayWorstCase(arraySize)).mapToInt(Integer::intValue).toArray();
-      }
-    }
-
-    @Nested
     class InsertionSort {
-      final static String ALGORITHM_NAME = "Sort::insertionSort(Comparable<E>[])";
-      final Consumer<Integer[]> ALGORITHM = Sort::insertionSort;
+      final static String ALGORITHM_NAME = "Sort::insertionSort(int[])";
+      final Consumer<int[]> ALGORITHM = Sort::insertionSort;
 
       @Test
       void insertionSort_bestCase_aka_sorted() {
@@ -329,54 +357,54 @@ class SortTest {
     }
 
     @Nested
-    class InsertionSortNullSafe {
-      final static String ALGORITHM_NAME = "Sort::insertionSortNullSafe(Comparable<E>[])";
-      final Consumer<Integer[]> ALGORITHM = Sort::insertionSortNullSafe;
+    class SelectionSort {
+      final static String ALGORITHM_NAME = "Sort::selectionSort(int[])";
+      final Consumer<int[]> ALGORITHM = Sort::selectionSort;
 
       @Test
-      void insertionSort_bestCase_aka_sorted() {
+      void selectionSort_bestCase_aka_sorted() {
         measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayBestCase, ALGORITHM_NAME, "bestCase");
       }
 
       @Test
-      void insertionSort_averageCase_aka_random() {
+      void selectionSort_averageCase_aka_random() {
         measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayAverageCase, ALGORITHM_NAME, "random");
       }
 
       @Test
-      void insertionSort_worstCase_aka_ReverseSorted() {
+      void selectionSort_worstCase_aka_ReverseSorted() {
         measureRunTime(ALGORITHM, PerformanceTest::setupMasterArrayWorstCase, ALGORITHM_NAME, "worstCase");
       }
     }
 
-    private static Integer[] setupMasterArrayBestCase(final int arraySize) {
-      final Integer[] values = new Integer[arraySize];
+    private static int[] setupMasterArrayBestCase(final int arraySize) {
+      final int[] values = new int[arraySize];
       for (int i = 0; i < arraySize; i++) {
         values[i] = i;
       }
       return values;
     }
 
-    private static Integer[] setupMasterArrayAverageCase(final int arraySize) {
-      final Integer[] values = new Integer[arraySize];
-      final Random random = new Random(); //instance of random class
+    private static int[] setupMasterArrayAverageCase(final int arraySize) {
+      final int[] values = new int[arraySize];
+      final Random random = new Random();
       for (int i = 0; i < arraySize; i++) {
         values[i] = random.nextInt();
       }
       return values;
     }
 
-    private static Integer[] setupMasterArrayWorstCase(final int arraySize) {
-      final Integer[] values = new Integer[arraySize];
+    private static int[] setupMasterArrayWorstCase(final int arraySize) {
+      final int[] values = new int[arraySize];
       for (int i = 0, value = arraySize; i < arraySize; i++, value--) {
         values[i] = value;
       }
       return values;
     }
 
-    private void measureRunTime(final Consumer<Integer[]> algorithm, //
-                                final Function<Integer, Integer[]> arrayCreationFunction,
-                                final String algorithmName, final String caseUsed) {
+    private void measureRunTime(final Consumer<int[]> algorithm, //
+                                final Function<Integer, int[]> arrayCreationFunction, final String algorithmName,
+                                final String caseUsed) {
       long runTimeSmallArray = -1;
       long runTimeMediumArray = -1;
       long runTimeLargeArray = -1;
@@ -400,54 +428,7 @@ class SortTest {
       printResults(algorithmName, caseUsed, runTimeSmallArray, runTimeMediumArray, runTimeLargeArray);
     }
 
-    private long measureRunTime(final Consumer<Integer[]> algorithm, final Integer[] input) {
-      final int length = input.length;
-      int timeUsed = 0;
-      for (int i = 0; i < RUNS; i++) {
-        LOG.trace(i);
-
-        // important, to do the array copy -> otherwise, all runs after the first run are made on an already sorted
-        // array
-        // call for coping the array is excluded from the time measurement
-        final Integer[] testArray = Arrays.copyOf(input, length);
-
-        final long startTime = System.currentTimeMillis();
-        algorithm.accept(testArray);
-        final long endTime = System.currentTimeMillis();
-        timeUsed += (endTime - startTime);
-
-        LOG.trace(timeUsed);
-      }
-      return timeUsed / RUNS;
-    }
-
-    private void measureRunTimeUnboxed(final Consumer<int[]> algorithm, //
-                                       final Function<Integer, int[]> arrayCreationFunction, final String algorithmName,
-                                       final String caseUsed) {
-      long runTimeSmallArray = -1;
-      long runTimeMediumArray = -1;
-      long runTimeLargeArray = -1;
-
-      if (MEASURE_SMALL_ARRAY) {
-        runTimeSmallArray = measureRunTimeUnboxed(algorithm, arrayCreationFunction.apply(SMALL_ARRAY));
-        LOG.trace("measure small master array done");
-      }
-
-      if (MEASURE_MEDIUM_ARRAY) {
-        runTimeMediumArray = measureRunTimeUnboxed(algorithm, arrayCreationFunction.apply(MEDIUM_ARRAY));
-        LOG.trace("measure medium master array done");
-      }
-
-      if (MEASURE_LARGE_ARRAY) {
-        runTimeLargeArray = measureRunTimeUnboxed(algorithm, arrayCreationFunction.apply(LARGE_ARRAY));
-        LOG.trace("measure large master array done");
-      }
-      LOG.trace("");
-
-      printResults(algorithmName, caseUsed, runTimeSmallArray, runTimeMediumArray, runTimeLargeArray);
-    }
-
-    private long measureRunTimeUnboxed(final Consumer<int[]> algorithm, final int[] input) {
+    private long measureRunTime(final Consumer<int[]> algorithm, final int[] input) {
       final int length = input.length;
       int timeUsed = 0;
       for (int i = 0; i < RUNS; i++) {
@@ -482,6 +463,117 @@ class SortTest {
         LOG.info("Amount of items in large array:     " + LARGE_ARRAY);
       }
       LOG.info("");
+    }
+
+    // @Nested
+    class ComparableAlgorithms {
+
+      @Nested
+      class InsertionSortComparable {
+        final static String ALGORITHM_NAME = "Sort::insertionSortComparable(Comparable<E>[])";
+        final Consumer<Integer[]> ALGORITHM = Sort::insertionSortComparable;
+
+        @Test
+        void insertionSortComparable_bestCase_aka_sorted() {
+          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayBestCaseBoxed, ALGORITHM_NAME,
+                              "bestCase");
+        }
+
+        @Test
+        void insertionSortComparable_averageCase_aka_random() {
+          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayAverageCaseBoxed, ALGORITHM_NAME,
+                              "random");
+        }
+
+        @Test
+        void insertionSortComparable_worstCase_aka_ReverseSorted() {
+          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayWorstCaseBoxed, ALGORITHM_NAME,
+                              "worstCase");
+        }
+      }
+
+      @Nested
+      class InsertionSortComparableNullSafe {
+        final static String ALGORITHM_NAME = "Sort::insertionSortComparableNullSafe(Comparable<E>[])";
+        final Consumer<Integer[]> ALGORITHM = Sort::insertionSortComparableNullSafe;
+
+        @Test
+        void insertionSortComparable_bestCase_aka_sorted() {
+          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayBestCaseBoxed, ALGORITHM_NAME,
+                              "bestCase");
+        }
+
+        @Test
+        void insertionSortComparable_averageCase_aka_random() {
+          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayAverageCaseBoxed, ALGORITHM_NAME,
+                              "random");
+        }
+
+        @Test
+        void insertionSortComparable_worstCase_aka_ReverseSorted() {
+          measureRunTimeBoxed(ALGORITHM, ComparableAlgorithms::setupMasterArrayWorstCaseBoxed, ALGORITHM_NAME,
+                              "worstCase");
+        }
+      }
+
+      private static Integer[] setupMasterArrayBestCaseBoxed(final int arraySize) {
+        return Arrays.stream(PerformanceTest.setupMasterArrayBestCase(arraySize)).boxed().toArray(Integer[]::new);
+      }
+
+      private static Integer[] setupMasterArrayAverageCaseBoxed(final int arraySize) {
+        return Arrays.stream(PerformanceTest.setupMasterArrayAverageCase(arraySize)).boxed().toArray(Integer[]::new);
+      }
+
+      private static Integer[] setupMasterArrayWorstCaseBoxed(final int arraySize) {
+        return Arrays.stream(PerformanceTest.setupMasterArrayWorstCase(arraySize)).boxed().toArray(Integer[]::new);
+      }
+
+      private void measureRunTimeBoxed(final Consumer<Integer[]> algorithm, //
+                                       final Function<Integer, Integer[]> arrayCreationFunction,
+                                       final String algorithmName, final String caseUsed) {
+        long runTimeSmallArray = -1;
+        long runTimeMediumArray = -1;
+        long runTimeLargeArray = -1;
+
+        if (MEASURE_SMALL_ARRAY) {
+          runTimeSmallArray = measureRunTimeBoxed(algorithm, arrayCreationFunction.apply(SMALL_ARRAY));
+          LOG.trace("measure small master array done");
+        }
+
+        if (MEASURE_MEDIUM_ARRAY) {
+          runTimeMediumArray = measureRunTimeBoxed(algorithm, arrayCreationFunction.apply(MEDIUM_ARRAY));
+          LOG.trace("measure medium master array done");
+        }
+
+        if (MEASURE_LARGE_ARRAY) {
+          runTimeLargeArray = measureRunTimeBoxed(algorithm, arrayCreationFunction.apply(LARGE_ARRAY));
+          LOG.trace("measure large master array done");
+        }
+        LOG.trace("");
+
+        printResults(algorithmName, caseUsed, runTimeSmallArray, runTimeMediumArray, runTimeLargeArray);
+      }
+
+      private long measureRunTimeBoxed(final Consumer<Integer[]> algorithm, final Integer[] input) {
+        final int length = input.length;
+        int timeUsed = 0;
+        for (int i = 0; i < RUNS; i++) {
+          LOG.trace(i);
+
+          // important, to do the array copy -> otherwise, all runs after the first run are made on an already sorted
+          // array
+          // call for coping the array is excluded from the time measurement
+          final Integer[] testArray = Arrays.copyOf(input, length);
+
+          final long startTime = System.currentTimeMillis();
+          algorithm.accept(testArray);
+          final long endTime = System.currentTimeMillis();
+          timeUsed += (endTime - startTime);
+
+          LOG.trace(timeUsed);
+        }
+        return timeUsed / RUNS;
+      }
     }
   }
 }
