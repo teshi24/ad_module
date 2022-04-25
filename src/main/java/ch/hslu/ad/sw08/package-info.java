@@ -35,7 +35,7 @@
  *      -> Sorts the specified array of objects according to the order induced by the specified comparator.
  *    - {@link java.util.Arrays#sort(java.lang.Object[], int, int, java.util.Comparator)}
  *      -> Sorts the specified range of the specified array of objects according to the order induced by the specified comparator.
- *    -> alle sind stabile, iterative mergesort  s
+ *    -> alle sind stabile, iterative mergesorts
  *
  * Aufgabe 2 - Entscheidungsbaum
  * 2.3
@@ -72,5 +72,22 @@
  *    direkten Auswählen. Egal, wie die Anordnung ist, es muss immer der gesamte unsortierte Array durchsucht werden,
  *    um den kleinsten Schlüssel zu finden. Die Aufwände für die Vergleiche und Verschiebungen, die die Cases noch unterscheiden,
  *    sind verhältnismässig klein und daher vernachlässigbar.
+ *
+ *
+ *   Aus Repetition in Woche 9
+ *    Stabile Sortieralgorithmen:
+ *    - Insertion Sort
+ *    - Bubble Sort
+ *
+ *    Instabile Sortieralgorithmen:
+ *    - Selection Sort
+ *    - Shell Sort
+ *
+ *    --> also halt wenn man über grössere Distanzen vertauscht, ohne die Daten dazwischen zu berücksichtigen
+ *        ist die Stabilität nicht mehr fix gewährleistet
+ *
+ *   Vergleichsbasierte Sortieralgorithmen besitzen bestenfalls (ohne Nebenläufigkeit) die Zeitkomplexität
+ *   O(n * log(n)) oder O(n * ld(n))
+ *
  */
 package ch.hslu.ad.sw08;

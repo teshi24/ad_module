@@ -16,7 +16,7 @@ public class Sort {
    * @throws NullPointerException if {@param inputArray} is null
    */
   public static void insertionSort(final int[] array) {
-    // insertionSort(array, 1);
+    //insertionSort(array, 1);
     insertionSortOptimized(array);
   }
 
@@ -118,7 +118,7 @@ public class Sort {
     }
   }
 
-  private static int[] hibbardNrs = initializeHibbardNrs();
+  private static final int[] hibbardNrs = initializeHibbardNrs();
 
   private static int[] initializeHibbardNrs() {
     final int[] hibbardNrs = new int[31]; // hibbardNr nr 32 = 2147483647, biggest hibbardNr in int range
@@ -136,17 +136,15 @@ public class Sort {
     int element;
     int iSortedArrayPart;
 
-    for (int j = 0; j < array.length; j++) {
-      for (int i = j + stepSize; i < array.length; i += stepSize) {
-        element = array[i];
+    for (int i = stepSize; i < array.length; i++) {
+      element = array[i];
 
-        iSortedArrayPart = i; // array[0]..array[iSortedArrayPart - 1] is already sorted
-        while ((iSortedArrayPart - stepSize) > -1 && array[iSortedArrayPart - stepSize] > element) {
-          array[iSortedArrayPart] = array[iSortedArrayPart - stepSize]; // shift element to the right
-          iSortedArrayPart -= stepSize; // go further left
-        }
-        array[iSortedArrayPart] = element; // insertElement
+      iSortedArrayPart = i; // array[0]..array[iSortedArrayPart - 1] is already sorted
+      while (iSortedArrayPart >= stepSize && array[iSortedArrayPart - stepSize] > element) {
+        array[iSortedArrayPart] = array[iSortedArrayPart - stepSize]; // shift element to the right
+        iSortedArrayPart -= stepSize; // go further left
       }
+      array[iSortedArrayPart] = element; // insertElement
     }
   }
 
@@ -155,7 +153,6 @@ public class Sort {
    *
    * @param array
    */
-  // probably smth wrong with this - best case scenario
   public static void shellSort(final int[] array) {
     if (array.length <= 0) {
       return;

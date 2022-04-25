@@ -511,8 +511,8 @@ class SortTest {
     final static boolean MEASURE_MEDIUM_ARRAY = false;
     final static boolean MEASURE_LARGE_ARRAY = true;
 
-    final static boolean MEASURE_BEST_CASE = false;
-    final static boolean MEASURE_WORST_CASE = false;
+    final static boolean MEASURE_BEST_CASE = true;
+    final static boolean MEASURE_WORST_CASE = true;
     final static boolean MEASURE_AVERAGE_CASE = true;
 
     final static int RUNS = 100;
@@ -551,7 +551,7 @@ class SortTest {
       }
     }
 
-    @Nested
+    // @Nested
     class BubbleSort extends PerformanceTestCase {
       final static String ALGORITHM_NAME = "Sort::bubbleSort(int[])";
       final static Consumer<int[]> ALGORITHM = Sort::bubbleSort;
@@ -615,19 +615,15 @@ class SortTest {
 
       if (MEASURE_SMALL_ARRAY) {
         runTimeSmallArray = measureRunTime(algorithm, arrayCreationFunction.apply(SMALL_ARRAY));
-        LOG.trace("measure small master array done");
       }
 
       if (MEASURE_MEDIUM_ARRAY) {
         runTimeMediumArray = measureRunTime(algorithm, arrayCreationFunction.apply(MEDIUM_ARRAY));
-        LOG.trace("measure medium master array done");
       }
 
       if (MEASURE_LARGE_ARRAY) {
         runTimeLargeArray = measureRunTime(algorithm, arrayCreationFunction.apply(LARGE_ARRAY));
-        LOG.trace("measure large master array done");
       }
-      LOG.trace("");
 
       printResults(algorithmName, caseUsed, runTimeSmallArray, runTimeMediumArray, runTimeLargeArray);
     }
@@ -636,8 +632,6 @@ class SortTest {
       final int length = input.length;
       int timeUsed = 0;
       for (int i = 0; i < RUNS; i++) {
-        LOG.trace(i);
-
         // important, to do the array copy -> otherwise, all runs after the first run are made on an already sorted
         // array
         // call for coping the array is excluded from the time measurement
@@ -647,8 +641,6 @@ class SortTest {
         algorithm.accept(testArray);
         final long endTime = System.currentTimeMillis();
         timeUsed += (endTime - startTime);
-
-        LOG.trace(timeUsed);
       }
       return timeUsed / RUNS;
     }
@@ -779,19 +771,15 @@ class SortTest {
 
         if (MEASURE_SMALL_ARRAY) {
           runTimeSmallArray = measureRunTimeBoxed(algorithm, arrayCreationFunction.apply(SMALL_ARRAY));
-          LOG.trace("measure small master array done");
         }
 
         if (MEASURE_MEDIUM_ARRAY) {
           runTimeMediumArray = measureRunTimeBoxed(algorithm, arrayCreationFunction.apply(MEDIUM_ARRAY));
-          LOG.trace("measure medium master array done");
         }
 
         if (MEASURE_LARGE_ARRAY) {
           runTimeLargeArray = measureRunTimeBoxed(algorithm, arrayCreationFunction.apply(LARGE_ARRAY));
-          LOG.trace("measure large master array done");
         }
-        LOG.trace("");
 
         printResults(algorithmName, caseUsed, runTimeSmallArray, runTimeMediumArray, runTimeLargeArray);
       }
@@ -800,7 +788,6 @@ class SortTest {
         final int length = input.length;
         int timeUsed = 0;
         for (int i = 0; i < RUNS; i++) {
-          LOG.trace(i);
 
           // important, to do the array copy -> otherwise, all runs after the first run are made on an already sorted
           // array
@@ -811,8 +798,6 @@ class SortTest {
           algorithm.accept(testArray);
           final long endTime = System.currentTimeMillis();
           timeUsed += (endTime - startTime);
-
-          LOG.trace(timeUsed);
         }
         return timeUsed / RUNS;
       }
