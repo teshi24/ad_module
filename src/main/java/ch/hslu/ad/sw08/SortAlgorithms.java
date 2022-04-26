@@ -171,29 +171,8 @@ public final class SortAlgorithms {
     return hibbardNrs;
   }
 
-  private static void insertionSort(final int[] array, final int stepSize) {
-    if (array.length <= 0) {
-      return;
-    }
-    int element;
-    int iSortedArrayPart;
-
-    for (int i = stepSize; i < array.length; i++) {
-      element = array[i];
-
-      iSortedArrayPart = i; // array[0]..array[iSortedArrayPart - 1] is already sorted
-      while (iSortedArrayPart >= stepSize && array[iSortedArrayPart - stepSize] > element) {
-        array[iSortedArrayPart] = array[iSortedArrayPart - stepSize]; // shift element to the right
-        iSortedArrayPart -= stepSize; // go further left
-      }
-      array[iSortedArrayPart] = element; // insertElement
-    }
-  }
-
   /**
-   * shellSort using HibbardFolge --> 2^k-1
-   *
-   * @param array
+   * shellSort using HibbardFolge (2^k-1)
    */
   public static void shellSort(final int[] array) {
     if (array.length <= 0) {
@@ -213,4 +192,24 @@ public final class SortAlgorithms {
       insertionSort(array, hibbardNr);
     }
   }
+
+  private static void insertionSort(final int[] array, final int stepSize) {
+    if (array.length <= 0) {
+      return;
+    }
+    int element;
+    int iSortedArrayPart;
+
+    for (int i = stepSize; i < array.length; i++) {
+      element = array[i];
+
+      iSortedArrayPart = i; // array[0]..array[iSortedArrayPart - 1] is already sorted
+      while (iSortedArrayPart >= stepSize && array[iSortedArrayPart - stepSize] > element) {
+        array[iSortedArrayPart] = array[iSortedArrayPart - stepSize]; // shift element to the right
+        iSortedArrayPart -= stepSize; // go further left
+      }
+      array[iSortedArrayPart] = element; // insertElement
+    }
+  }
+
 }
