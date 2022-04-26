@@ -3,8 +3,8 @@ package ch.hslu.ad.performanceTesting;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import static ch.hslu.ad.performanceTesting.AlgorithmPerformanceTest.LARGE_ARRAY;
 import static ch.hslu.ad.performanceTesting.AlgorithmPerformanceTest.MEASURE_AVERAGE_CASE;
@@ -20,26 +20,26 @@ import static ch.hslu.ad.performanceTesting.AlgorithmPerformanceTest.SMALL_ARRAY
 public abstract class PerformanceTestCasePrimitive extends AlgorithmPerformanceTest.PerformanceTestCase {
   final String algorithmName;
   final Consumer<int[]> algorithm;
-  final Function<Integer, int[]> setupMasterArrayBestCase;
-  final Function<Integer, int[]> setupMasterArrayAverageCase;
-  final Function<Integer, int[]> setupMasterArrayWorstCase;
+  final String masterArrayBestCase;
+  final String masterArrayWorstCase;
+  final String masterArrayAverageCase;
 
   public PerformanceTestCasePrimitive(final String algorithmName, final Consumer<int[]> algorithm, //
-                                      final Function<Integer, int[]> setupMasterArrayBestCase, //
-                                      final Function<Integer, int[]> setupMasterArrayAverageCase, //
-                                      final Function<Integer, int[]> setupMasterArrayWorstCase) {
+                                      final String masterArrayBestCase, //
+                                      final String masterArrayAverageCase, //
+                                      final String masterArrayWorstCase) {
     this.algorithmName = algorithmName;
     this.algorithm = algorithm;
-    this.setupMasterArrayBestCase = setupMasterArrayBestCase;
-    this.setupMasterArrayAverageCase = setupMasterArrayAverageCase;
-    this.setupMasterArrayWorstCase = setupMasterArrayWorstCase;
+    this.masterArrayBestCase = masterArrayBestCase;
+    this.masterArrayAverageCase = masterArrayAverageCase;
+    this.masterArrayWorstCase = masterArrayWorstCase;
   }
 
   @Test
   void bestCase() {
     if (MEASURE_BEST_CASE) {
       printTitleIfItWasFirstTestCase(algorithmName);
-      measureRunTime(algorithm, setupMasterArrayBestCase, "bestCase");
+      measureRunTime(algorithm, "bestCase", masterArrayBestCase);
     }
   }
 
@@ -47,7 +47,7 @@ public abstract class PerformanceTestCasePrimitive extends AlgorithmPerformanceT
   void averageCase() {
     if (MEASURE_AVERAGE_CASE) {
       printTitleIfItWasFirstTestCase(algorithmName);
-      measureRunTime(algorithm, setupMasterArrayAverageCase, "random");
+      measureRunTime(algorithm, "averageCase", masterArrayAverageCase);
     }
   }
 
@@ -55,26 +55,27 @@ public abstract class PerformanceTestCasePrimitive extends AlgorithmPerformanceT
   void worstCase() {
     if (MEASURE_WORST_CASE) {
       printTitleIfItWasFirstTestCase(algorithmName);
-      measureRunTime(algorithm, setupMasterArrayWorstCase, "worstCase");
+      measureRunTime(algorithm, "worstCase", masterArrayWorstCase);
     }
   }
 
-  private void measureRunTime(final Consumer<int[]> algorithm, final Function<Integer, int[]> arrayCreationFunction,
-                              final String caseUsed) {
+  private void measureRunTime(final Consumer<int[]> algorithm, final String caseUsed, final String masterArrayType) {
     long runTimeSmallArray = -1;
     long runTimeMediumArray = -1;
     long runTimeLargeArray = -1;
+    final Map<Integer, MasterArray> arraysBySize = MasterArray.getArraysBySizeForType(masterArrayType);
+    // arraysBySize.values().forEach(e -> System.out.println(e.getMasterArray()));
 
     if (MEASURE_SMALL_ARRAY) {
-      runTimeSmallArray = measureRunTime(algorithm, arrayCreationFunction.apply(SMALL_ARRAY));
+      runTimeSmallArray = measureRunTime(algorithm, arraysBySize.get(SMALL_ARRAY).getMasterArray());
     }
 
     if (MEASURE_MEDIUM_ARRAY) {
-      runTimeMediumArray = measureRunTime(algorithm, arrayCreationFunction.apply(MEDIUM_ARRAY));
+      runTimeMediumArray = measureRunTime(algorithm, arraysBySize.get(MEDIUM_ARRAY).getMasterArray());
     }
 
     if (MEASURE_LARGE_ARRAY) {
-      runTimeLargeArray = measureRunTime(algorithm, arrayCreationFunction.apply(LARGE_ARRAY));
+      runTimeLargeArray = measureRunTime(algorithm, arraysBySize.get(LARGE_ARRAY).getMasterArray());
     }
 
     super.printResults(caseUsed, runTimeSmallArray, runTimeMediumArray, runTimeLargeArray);

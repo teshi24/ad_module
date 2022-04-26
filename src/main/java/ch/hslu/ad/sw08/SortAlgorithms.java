@@ -17,11 +17,11 @@ public final class SortAlgorithms {
    * @throws NullPointerException if {@param inputArray} is null
    */
   public static void insertionSort(final int[] array) {
-    //insertionSort(array, 1);
-    insertionSortOptimized(array);
+    insertionSort(array, 1);
+    //insertionSortOptimized(array);
   }
 
-  private static void insertionSortOptimized(final int[] array) {
+  static void insertionSortOptimized(final int[] array) {
     // T ~ a
     if (array.length <= 0) {
       return;

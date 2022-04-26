@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public abstract class AlgorithmPerformanceTest {
   private final static Logger LOG = LogManager.getLogger(AlgorithmPerformanceTest.class);
 
-  final static int LARGE_ARRAY = 50_492;
+  final static int LARGE_ARRAY = 80_492;
   final static int MEDIUM_ARRAY = LARGE_ARRAY / 2;
   final static int SMALL_ARRAY = MEDIUM_ARRAY / 2;
 
