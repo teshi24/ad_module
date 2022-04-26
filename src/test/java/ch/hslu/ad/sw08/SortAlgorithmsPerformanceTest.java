@@ -14,12 +14,26 @@ import java.util.function.Consumer;
 class SortAlgorithmsPerformanceTest extends AlgorithmPerformanceTest {
 
   @Nested
-  @Order(1)
+  @Order(0)
   class InsertionSort extends PerformanceTestCasePrimitive {
     final static String ALGORITHM_NAME = "SortAlgorithms::insertionSort(int[])";
     final static Consumer<int[]> ALGORITHM = SortAlgorithms::insertionSort;
 
     private InsertionSort() {
+      super(ALGORITHM_NAME, ALGORITHM, //
+            TestArrays::setupMasterArraySorted, //
+            TestArrays::setupMasterArrayRandom, //
+            TestArrays::setupMasterArrayReverseSorted);
+    }
+  }
+
+  @Nested
+  @Order(1)
+  class InsertionSortOptimized extends PerformanceTestCasePrimitive {
+    final static String ALGORITHM_NAME = "SortAlgorithms::insertionSortOptimizedWithBinarySearch(int[])";
+    final static Consumer<int[]> ALGORITHM = SortAlgorithms::insertionSortOptimizedWithBinarySearch;
+
+    private InsertionSortOptimized() {
       super(ALGORITHM_NAME, ALGORITHM, //
             TestArrays::setupMasterArraySorted, //
             TestArrays::setupMasterArrayRandom, //
@@ -69,7 +83,7 @@ class SortAlgorithmsPerformanceTest extends AlgorithmPerformanceTest {
     }
   }
 
-  // @Nested
+  @Nested
   @Order(5)
   class BubbleSortBestCaseOptimized extends PerformanceTestCasePrimitive {
     final static String ALGORITHM_NAME = "SortAlgorithms::bubbleSortBestCaseOptimized(int[])";

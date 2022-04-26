@@ -4,6 +4,7 @@
  * a) Triangle Klasse - Dreieck-Objekte, definiert durch 3 Eckpunkte (x/y)-Koordinaten
  *    Mögliche Totale Ordnungen:
  *    - Fläche absteigend, aufsteigend (kann mit den Eckpunkten berechnet werden)
+ *    - Umfang / längste Seite, kürzeste Seite
  *    - Punkte - Entfernung vom Ursprung des Koordinatensystem
  *    - evtl. Tiefstes Dreieck bis Höhestes Dreieck / Dreiecke von Links nach Rechts im Koordinatensystem
  *    - Vorgeschlagene natürliche Ordnung: sortieren nach Fläche von Kleinstem zum Grössten
@@ -70,8 +71,11 @@
  *    sortiert gemäss Kriterien, aber das 1. 8 ist nach der 2. 8
  * c) nein, die Unterscheidung zwischen Best Case, Worst Case und Average Case ist nicht sinnvoll beim
  *    direkten Auswählen. Egal, wie die Anordnung ist, es muss immer der gesamte unsortierte Array durchsucht werden,
- *    um den kleinsten Schlüssel zu finden. Die Aufwände für die Vergleiche und Verschiebungen, die die Cases noch unterscheiden,
+ *    um den kleinsten Schlüssel zu finden. Die Aufwände für die Verschiebungen, die die Cases noch unterscheiden,
  *    sind verhältnismässig klein und daher vernachlässigbar.
+ *
+ *
+ *
  *
  *
  *   Aus Repetition in Woche 9

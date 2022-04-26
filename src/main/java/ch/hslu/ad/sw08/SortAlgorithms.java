@@ -1,13 +1,13 @@
 package ch.hslu.ad.sw08;
 
+import java.util.Arrays;
+
 import static java.lang.Integer.MAX_VALUE;
 
 public final class SortAlgorithms {
 
   private SortAlgorithms() {
   }
-
-  // todo: Einfügestelle mit binärer Suche suchen (A3 optional d)
 
   /**
    * Sorts the given int array using insertion sort {@see
@@ -69,6 +69,43 @@ public final class SortAlgorithms {
   //    ~ n + n^2 + n
   //    ~ n^2
 
+  static void insertionSortOptimizedWithBinarySearch(final int[] array) {
+    if (array.length < 2) {
+      return;
+    }
+    int element;
+    int lastSortedIndex = 0;
+
+    for (int i = 1; i < array.length; i++) {
+      element = array[i];
+
+      lastSortedIndex = i; // array[0]..array[lastSortedIndex - 1] is already sorted
+      final int insertionPosition = findIndexUsingBinarySearch(array, element, 0, lastSortedIndex - 1) + 1;
+      for (int iToBeShifted = lastSortedIndex; iToBeShifted > insertionPosition; iToBeShifted--) {
+        array[iToBeShifted] = array[iToBeShifted - 1];
+      }
+      array[insertionPosition] = element; // insertElement
+    }
+  }
+
+  private static void soutArray(final int[] array) {
+    System.out.println(String.join(",", Arrays.stream(array).mapToObj(String::valueOf).toArray(String[]::new)));
+  }
+
+  static int findIndexUsingBinarySearch(int[] arr, int elementToBeFound, final int sortedStartIndex,
+                                        int sortedEndIndex) {
+    int start = sortedStartIndex;
+    int end = sortedEndIndex;
+
+    while (start <= end) {
+      int mid = (start + end) / 2;
+      if (arr[mid] == elementToBeFound) return mid;
+      else if (arr[mid] < elementToBeFound) start = mid + 1;
+      else end = mid - 1;
+    }
+    return end;
+  }
+
   public static void selectionSort(final int[] array) {
     // T ~ n
     for (int iFirstUnsortedElement = 0; iFirstUnsortedElement < array.length; iFirstUnsortedElement++) {
@@ -102,6 +139,10 @@ public final class SortAlgorithms {
     }
   }
 
+  /**
+   * optimal für eine bereits sortierte liste
+   * @param array
+   */
   public static void bubbleSortBestCaseOptimized(final int[] array) {
     for (int iLastUnsortedElement = array.length - 1; iLastUnsortedElement > 0; iLastUnsortedElement--) {
       boolean exchangeMade = false;
